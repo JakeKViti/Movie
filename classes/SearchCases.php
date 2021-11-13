@@ -74,10 +74,86 @@
         }
 
         public function getKeywordId($term){
-            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=136469f073307015b7f82e70f160e679&query=$$term";
+            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$$term";
             @$test = file_get_contents($keywordUrL, false, null, 30, 30);
             $idNumber = filter_var($test, FILTER_SANITIZE_NUMBER_FLOAT);
             return $idNumber;
+        }
+
+        public function getResults($json_data){
+            for($i = 0; $i < count($json_data['results']); $i++){
+                @print_r($json_data['results'][$i]['original_title']);
+                echo " ";
+                foreach(@$json_data['results'][$i]['genre_ids'] as $genre){
+                    switch($genre){
+                        case 12:
+                            echo "Adventure ";
+                            break;
+                        case 14:
+                            echo "Fantasy ";
+                            break;
+                        case 16:
+                            echo "Animation ";
+                            break;
+                        case 18:
+                            echo "Drama ";
+                            break;
+                        case 27:
+                            echo "Horror ";
+                            break;
+                        case 28:
+                            echo "Action ";
+                            break;
+                        case 35:
+                            echo "Comedy ";
+                            break;
+                        case 36:
+                            echo "History ";
+                            break;
+                        case 37:
+                            echo "Western ";
+                            break;
+                        case 53:
+                            echo "Thriller ";
+                            break;
+                        case 80:
+                            echo "Crime ";
+                            break;
+                        case 99:
+                            echo "Documentary ";
+                            break;
+                        case 878:
+                            echo "Science Fiction ";
+                            break;
+                        case 9648:
+                            echo "Mystery ";
+                            break;
+                        case 10402:
+                            echo "Music ";
+                            break;
+                        case 10749:
+                            echo "Romance ";
+                            break;
+                        case 10751:
+                            echo "Family ";
+                            break;
+                        case 10752:
+                            echo "War ";
+                            break;
+                        case 10770:
+                            echo "TV Movie ";
+                            break;        
+                    }
+                }
+                echo " ";
+                @print_r($json_data['results'][$i]['release_date']);
+                $this->favoriteButton();
+                echo "<br>";
+            }
+        }
+
+        public function favoriteButton(){
+            echo "<button type='button' onclick=\"alert('I Like This Movie!')\">Favorite Movie!</button>";
         }
     }
 ?>

@@ -21,6 +21,6 @@
     include("classes/SearchCases.php");
     $SearchCases = new SearchCases($_GET['term']);
     $jsonData = $SearchCases->getSearch($_GET['term']);
-    print_r($jsonData['results'][0]);
+    $SearchCases->getResults($jsonData);
 ?>
 
