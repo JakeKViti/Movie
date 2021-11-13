@@ -20,17 +20,19 @@
 <?php
     echo"<pre>";
     $searchTerm = $_GET['term'];
-    
-    $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$searchTerm";
+    if(is_numeric($_GET['term'])){
+        $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
+        $movieSearch = file_get_contents($yearSearch, true);
+    } else {
+        $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$searchTerm";
+        @$test = file_get_contents($keywordUrL, false, null, 30, 30);
+        $idNumber = filter_var($test, FILTER_SANITIZE_NUMBER_FLOAT);
+        $movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_keywords=$idNumber";
+        $movieSearch = file_get_contents($movieUrl, true);
+    }
     print_r($_GET['term']);
-    echo "<br>";
-    @$test = file_get_contents($keywordUrL, false, null, 30, 30);
-    $idNumber = filter_var($test, FILTER_SANITIZE_NUMBER_FLOAT);
-    $movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_keywords=$idNumber";
-    $movieSearch = file_get_contents($movieUrl, true);
+    echo "<br>";  
     $movieArray = array($movieSearch);
-
-
     $json_data = json_decode($movieSearch, true);
     //print_r($json_data['results'][0]);
 
