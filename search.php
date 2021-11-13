@@ -19,8 +19,90 @@
 
 <?php
     echo"<pre>";
-    $searchTerm = $_GET['term'];
-    if(is_numeric($_GET['term'])){
+    $searchTerm = strtolower($_GET['term']);
+    $genreCheck = false;
+    switch($_GET['term']){
+        case "adventure":
+            $searchTerm = 12;
+            $genreCheck = true;
+            break;
+        case "fantasy":
+            $searchTerm = 14;
+            $genreCheck = true;
+            break;
+        case "animation":
+            $searchTerm = 16;
+            $genreCheck = true;
+            break;
+        case "drama":
+            $searchTerm = 18;
+            $genreCheck = true;
+            break;
+        case "horror":
+            $searchTerm = 27;
+            $genreCheck = true;
+            break;
+        case "action":
+            $searchTerm = 28;
+            $genreCheck = true;
+            break;
+        case "comedy":
+            $searchTerm = 35;
+            $genreCheck = true;
+            break;
+        case "history":
+            $searchTerm = 36;
+            $genreCheck = true;
+            break;
+        case "western":
+            $searchTerm = 37;
+            $genreCheck = true;
+            break;
+        case "thriller":
+            $searchTerm = 57;
+            $genreCheck = true;
+            break;
+        case "crime":
+            $searchTerm = 80;
+            $genreCheck = true;
+            break;
+        case "documentary":
+            $searchTerm = 99;
+            $genreCheck = true;
+            break;
+        case "science fiction":
+            $searchTerm = 878;
+            $genreCheck = true;
+            break;
+        case "mystery":
+            $searchTerm = 9648;
+            $genreCheck = true;
+            break;
+        case "music":
+            $searchTerm = 10402;
+            $genreCheck = true;
+            break;
+        case "romance":
+            $searchTerm = 10749;
+            $genreCheck = true;
+            break;
+        case "family":
+            $searchTerm = 10751;
+            $genreCheck = true;
+            break;
+        case "war":
+            $searchTerm = 10752;
+            $genreCheck = true;
+            break;
+        case "tv movie":
+            $searchTerm = 10770;
+            $genreCheck = true;
+            break;        
+    }
+    if($genreCheck == true){
+        $genreSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=$searchTerm&with_watch_monetization_types=flatrate";
+        $movieSearch = file_get_contents($genreSearch, true);
+    } else if (is_numeric($_GET['term'])){
         $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
         $movieSearch = file_get_contents($yearSearch, true);
     } else {
