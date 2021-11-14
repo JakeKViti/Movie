@@ -1,3 +1,8 @@
+<?php
+    include("classes/SearchCases.php");
+    $SearchCases = new SearchCases($_GET['term']);
+    $json_data = $SearchCases->getSearch($_GET['term']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +14,7 @@
 </head>
 <body>
 <div class="indexPage">
-        <div class="mainSection">
+        <div class="header">
                 <div class="searchContainer">
                     <form action="search.php" method="GET">
                         <input class="searchBox" type="text" name="term">
@@ -18,15 +23,43 @@
                 </div>
         </div>
     </div>
+    <div class="resultsContainer">
+        <table id="myTable" class="tablesorter">
+            <thead>    
+                <tr>
+                    <th>Movie Title</th>
+                    <th>Genres</th>
+                    <th>Release Date</th>
+                    <th>Favorite?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php for($i = 0; $i < count($json_data['results']); $i++){ 
+                    $id = $json_data['results'][$i]['id'];
+                    echo '<tr>';
+                    echo "<th>";
+                    @print_r($json_data['results'][$i]['original_title']);
+                    echo "</th>";
+                    echo "<th>"; 
+                    foreach(@$json_data['results'][$i]['genre_ids'] as $genre){
+                        $SearchCases->genreCheck($genre);
+                    }
+                    echo "</th>";
+                    echo "<th>";
+                    @print_r($json_data['results'][$i]['release_date']);
+                    echo "</th>";
+                    echo "<th>";
+                    echo "I'm not having fun getting the favorite button working";
+                    echo "</th>";
+                    echo '</tr>';
+                
+                    //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
+                
+            }
+            echo '</tbody>';
+            echo "</table>";  
+            ?>
+            </tbody>
+    </div>
 </body>
 </html>
-
-<?php
-    include("classes/SearchCases.php");
-    $SearchCases = new SearchCases($_GET['term']);
-    $jsonData = $SearchCases->getSearch($_GET['term']);
-    echo '<table id="myTable" class="tablesorter">';
-    $SearchCases->getResults($jsonData);
-    echo "</table>";
-?>
-
