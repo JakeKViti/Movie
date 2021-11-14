@@ -81,13 +81,15 @@
         }
 
         public function getResults($json_data){
-            echo '<table>';
+            echo '<thead>';
             echo '<tr>';
             echo "<th>Movie Title</th>";
             echo "<th>Genres</th>";
             echo "<th>Release Date</th>";
             echo "<th>Favorite?</th>";
             echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
             for($i = 0; $i < count($json_data['results']); $i++){
                 $id = $json_data['results'][$i]['id'];
                 echo '<tr>';
@@ -165,10 +167,11 @@
                 echo "I'm not having fun getting the favorite button working";
                 echo "</th>";
                 echo '</tr>';
+                
                 //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
                 
             }
-            echo "</table>";
+            echo '</tbody>';
         }
 
         public function favoriteButton($id){
