@@ -81,9 +81,20 @@
         }
 
         public function getResults($json_data){
+            echo '<table>';
+            echo '<tr>';
+            echo "<th>Movie Title</th>";
+            echo "<th>Genres</th>";
+            echo "<th>Release Date</th>";
+            echo "<th>Favorite?</th>";
+            echo '</tr>';
             for($i = 0; $i < count($json_data['results']); $i++){
+                $id = $json_data['results'][$i]['id'];
+                echo '<tr>';
+                echo "<th>";
                 @print_r($json_data['results'][$i]['original_title']);
-                echo " ";
+                echo "</th>";
+                echo "<th>";
                 foreach(@$json_data['results'][$i]['genre_ids'] as $genre){
                     switch($genre){
                         case 12:
@@ -144,16 +155,33 @@
                             echo "TV Movie ";
                             break;        
                     }
+                    
                 }
-                echo " ";
+                echo "</th>";
+                echo "<th>";
                 @print_r($json_data['results'][$i]['release_date']);
-                $this->favoriteButton();
-                echo "<br>";
+                echo "</th>";
+                echo "<th>";
+                echo "I'm not having fun getting the favorite button working";
+                echo "</th>";
+                echo '</tr>';
+                //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
+                
             }
+            echo "</table>";
         }
 
-        public function favoriteButton(){
-            echo "<button type='button' onclick=\"alert('I Like This Movie!')\">Favorite Movie!</button>";
+        public function favoriteButton($id){
+            echo "<script>alert('$id')</script>";
+        }
+
+        public function setFavorite($id){
+
+            //if(isset($_COOKIE)){
+            //    $i++;
+            //} else {
+            //setcookie("Fav Movie",$id, 2147483647);
+            //}
         }
     }
 ?>
