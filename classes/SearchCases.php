@@ -14,7 +14,7 @@
                 $genreSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=$searchId&with_watch_monetization_types=flatrate";
                 $movieSearch = file_get_contents($genreSearch, true);
             } else if (is_numeric($searchTerm)){
-                $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
+                $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
                 $movieSearch = file_get_contents($yearSearch, true);
             } else {
                 $keywordId = $this->getKeywordId($term);
@@ -149,7 +149,8 @@
         }
 
         public function setFavorite($id){
-
+            echo "$id";
+            echo "<script>alert('$id')</script>";
             //if(isset($_COOKIE)){
             //    $i++;
             //} else {

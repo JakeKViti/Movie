@@ -31,6 +31,8 @@
                     <th>Genres</th>
                     <th>Release Date</th>
                     <th>Favorite?</th>
+                    <div class="demo">
+    
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +51,8 @@
                     @print_r($json_data['results'][$i]['release_date']);
                     echo "</th>";
                     echo "<th>";
-                    echo "I'm not having fun getting the favorite button working";
+                    
+                    echo "<button id=\"favbtn\" value=\"$id\">fav</button>";
                     echo "</th>";
                     echo '</tr>';
                 
