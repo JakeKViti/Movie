@@ -74,7 +74,7 @@
         }
 
         public function getKeywordId($term){
-            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$$term";
+            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$term";
             @$test = file_get_contents($keywordUrL, false, null, 30, 30);
             $idNumber = filter_var($test, FILTER_SANITIZE_NUMBER_FLOAT);
             return $idNumber;
@@ -143,6 +143,10 @@
                     
         }
         
+        public function getFavorite($title, $date, $genre){
+            $data = array($title, $date, $genre);
+            return $data;
+        }
         
         public function favoriteButton($id){
             echo "<script>alert('$id')</script>";
