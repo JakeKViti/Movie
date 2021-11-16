@@ -1,12 +1,25 @@
 <?php
     include("classes/SearchCases.php");
-    //if($_GET['term'] == NULL){
-    //    $SearchCases = new SearchCases($_GET['term']);
-    //    $json_data = $SearchCases->getSearch($_GET['term']);
-    //} else if (isset($_COOKIE['title'])) {
+    if($_GET['term'] != "Favorite"){
+        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+        if(@$_GET["type"] == "increase"){
+            $page++;
+        } else if (@$_GET["type"] == "decrease") {
+            if ($page > 1){
+                $page--;
+            }
+        }
+        $term = $_GET['term'];
+        $decrease = "decrease";
+        $increase = "increase";
+        $SearchCases = new SearchCases($_GET['term']);
+        $json_data = $SearchCases->getSearch($_GET['term'], $page);
+    } else if (isset($_COOKIE['title'])) {
         $SearchCases = new SearchCases($_COOKIE['title']);
         $data = $SearchCases->getFavorite($_COOKIE['title'], $_COOKIE['date'], $_COOKIE['genre']);
-    //}
+    } else {
+        echo "No favorite is detected";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,32 +55,37 @@
             </thead>
             <tbody>
                 <?php 
-            //        if($_GET['term'] == NULL){
-            //        for($i = 0; $i < count($json_data['results']); $i++){ 
-            //        $movie = $json_data['results'][$i]['original_title'];
-            //        $id = $json_data['results'][$i]['genre_ids'][0];
-            //        $releaseDate = $json_data['results'][$i]['release_date'];
-            //        echo '<tr>';
-            //        echo "<th>";
-            //        @print_r($json_data['results'][$i]['original_title']);
-            //        echo "</th>";
-            //        echo "<th>"; 
-            //        foreach(@$json_data['results'][$i]['genre_ids'] as $genre){
-            //            $SearchCases->genreCheck($genre);
-            //        }
-            //        echo "</th>";
-            //        echo "<th>";
-            //        @print_r($json_data['results'][$i]['release_date']);
-            //        echo "</th>";
-            //        echo "<th>";
-            //        
-            //        echo "<button id=\"favbtn\" value=\"$movie\" data-value1=\"$releaseDate\" data-value2=\"$id\">fav</button>";
-            //        echo "</th>";
-            //        echo '</tr>';
-            //    
-            //        //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
-            //    }
-            //} else if (isset($_COOKIE['title'])) {
+                    if($_GET['term'] != "Favorite"){
+                    for($i = 0; $i < count($json_data['results']); $i++){ 
+                    $movie = $json_data['results'][$i]['original_title'];
+                    $id = $json_data['results'][$i]['genre_ids'][0];
+                    $releaseDate = $json_data['results'][$i]['release_date'];
+                    echo '<tr>';
+                    echo "<th>";
+                    @print_r($json_data['results'][$i]['original_title']);
+                    echo "</th>";
+                    echo "<th>"; 
+                    foreach(@$json_data['results'][$i]['genre_ids'] as $genre){
+                        $SearchCases->genreCheck($genre);
+                    }
+                    echo "</th>";
+                    echo "<th>";
+                    @print_r($json_data['results'][$i]['release_date']);
+                    echo "</th>";
+                    echo "<th>";
+                    
+                    echo "<button id=\"favbtn\" value=\"$movie\" data-value1=\"$releaseDate\" data-value2=\"$id\">fav</button>";
+                    echo "</th>";
+                    echo '</tr>';
+                
+                    //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
+                }
+                echo "<a href='search.php?term=$term&type=$decrease&page=$page'><p>Page Back</p></a>";
+                echo "<a href='search.php?term=$term&type=$increase&page=$page'><p>Page Forward</p></a>";
+                //echo "<a href='search.php?term=$term&page=$page&paged=$decrease> <- </a>";
+                //echo "<a href='search.php?term=$term&page=$page&paged=$increase> -> </a>";
+                
+            } else if (isset($_COOKIE['title'])) {
                 echo '<tr>';
                 echo "<th>";
                 echo "$data[0]";
@@ -78,7 +96,7 @@
                 echo "<th>";
                 echo "$data[1]";
                 echo "</th>";
-           // }
+           }
             echo '</tbody>';
             echo "</table>";  
             ?>
