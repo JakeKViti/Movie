@@ -1,5 +1,4 @@
 <?php
-    //echo "<script>console.log(\"Hit\")</script>";
     if (isset($_POST['title'])) {
         $movieTitle = $_POST['title']; 
         setcookie("title",$movieTitle, time()+600000);

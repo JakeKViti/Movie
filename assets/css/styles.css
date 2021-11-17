@@ -1,0 +1,43 @@
+* {
+	font-family: arial, sans-serif;
+	color: #565656;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+}
+
+.wrapper {
+
+	display: flex;
+    flex-direction: column;
+    min-height: 100%;
+	
+}
+
+.wrapper.indexPage {
+	justify-content: center;
+}
+
+.mainSection .searchContainer {
+	margin-top: 20px;
+    width: 100%;
+}
+
+.mainSection .searchContainer form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.indexPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+  }

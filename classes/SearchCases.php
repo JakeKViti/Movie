@@ -22,7 +22,6 @@
                 $movieSearch = file_get_contents($movieUrl, true);
             }
 
-            $movieArray = array($movieSearch);
             $json_data = json_decode($movieSearch, true);
 
             return $json_data;
@@ -146,20 +145,6 @@
         public function getFavorite($title, $date, $genre){
             $data = array($title, $date, $genre);
             return $data;
-        }
-        
-        public function favoriteButton($id){
-            echo "<script>alert('$id')</script>";
-        }
-
-        public function setFavorite($id){
-            echo "$id";
-            echo "<script>alert('$id')</script>";
-            //if(isset($_COOKIE)){
-            //    $i++;
-            //} else {
-            //setcookie("Fav Movie",$id, 2147483647);
-            //}
         }
     }
 ?>

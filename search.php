@@ -25,7 +25,7 @@
 <html lang="en">
 <head>
     <title>Movies</title>
-    <link rel="stylesheet" href="/assets/css/theme.default.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <script type="text/javascript" src="assets/js/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="assets/js/jquery.tablesorter.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
@@ -40,7 +40,7 @@
                     </form>
                 </div>
         </div>
-    </div>
+    
     <div class="resultsContainer">
         <table id="myTable" class="tablesorter">
             <thead>    
@@ -75,15 +75,10 @@
                     echo "<th>";
                     
                     echo "<button id=\"favbtn\" value=\"$movie\" data-value1=\"$releaseDate\" data-value2=\"$id\">fav</button>";
+
                     echo "</th>";
                     echo '</tr>';
-                
-                    //echo "<button type='button' onclick='$this->favoriteButton($id);'>Favorite Movie!</button>
                 }
-                echo "<a href='search.php?term=$term&type=$decrease&page=$page'><p>Page Back</p></a>";
-                echo "<a href='search.php?term=$term&type=$increase&page=$page'><p>Page Forward</p></a>";
-                //echo "<a href='search.php?term=$term&page=$page&paged=$decrease> <- </a>";
-                //echo "<a href='search.php?term=$term&page=$page&paged=$increase> -> </a>";
                 
             } else if (isset($_COOKIE['title'])) {
                 echo '<tr>';
@@ -101,6 +96,15 @@
             echo "</table>";  
             ?>
             </tbody>
+    </div>
+    <div class="incrementContainer">
+        <?php
+            if($_GET['term'] != "Favorite"){
+                echo "<a href='search.php?term=$term&type=$decrease&page=$page'>Page Back </a>";
+                echo "<a href='search.php?term=$term&type=$increase&page=$page'>Page Forward</a>";
+            }
+        ?>
+    </div>
     </div>
 </body>
 </html>
