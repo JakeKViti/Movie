@@ -11,14 +11,14 @@
             $searchTerm = strtolower($term);
             if($this->getGenre($searchTerm) != false){
                 $searchId = $this->getGenre($searchTerm);
-                $genreSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&with_genres=$searchId&with_watch_monetization_types=flatrate";
+                $genreSearch = "https://api.themoviedb.org/3/discover/movie?api_key=136469f073307015b7f82e70f160e679&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&with_genres=$searchId&with_watch_monetization_types=flatrate";
                 $movieSearch = file_get_contents($genreSearch, true);
             } else if (is_numeric($searchTerm)){
-                $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
+                $yearSearch = "https://api.themoviedb.org/3/discover/movie?api_key=136469f073307015b7f82e70f160e679&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&primary_release_year=$searchTerm&with_watch_monetization_types=flatrate";
                 $movieSearch = file_get_contents($yearSearch, true);
             } else {
                 $keywordId = $this->getKeywordId($term);
-                $movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&with_watch_monetization_types=flatrate&with_keywords=$keywordId";
+                $movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=136469f073307015b7f82e70f160e679&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=$page&with_watch_monetization_types=flatrate&with_keywords=$keywordId";
                 $movieSearch = file_get_contents($movieUrl, true);
             }
 
@@ -73,7 +73,7 @@
         }
 
         public function getKeywordId($term){
-            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=&query=$term";
+            $keywordUrL = "https://api.themoviedb.org/3/search/keyword?api_key=136469f073307015b7f82e70f160e679&query=$term";
             @$test = file_get_contents($keywordUrL, false, null, 30, 30);
             $idNumber = filter_var($test, FILTER_SANITIZE_NUMBER_FLOAT);
             return $idNumber;

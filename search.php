@@ -100,8 +100,8 @@
     <div class="incrementContainer">
         <?php
             if($_GET['term'] != "Favorite"){
-                echo "<a href='search.php?term=$term&type=$decrease&page=$page'>Page Back </a>";
-                echo "<a href='search.php?term=$term&type=$increase&page=$page'>Page Forward</a>";
+                echo "<a href='search.php?term=$term&type=$decrease&page=$page'> ← </a>";
+                echo "<a href='search.php?term=$term&type=$increase&page=$page'> → </a>";
             }
         ?>
     </div>
