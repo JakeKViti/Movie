@@ -1,6 +1,5 @@
 $(function() {
   $("#myTable").tablesorter();
-
   $('#favbtn').click(function(){
     var movietitle = $(this).val();
     var releaseDate = this.dataset.value1;
@@ -10,6 +9,7 @@ $(function() {
       'date': releaseDate,
       'genre': genreId
     };
+    
     $.post("ajax.php", data, function (response) {
         alert("Movie was added to favorite");
     });
