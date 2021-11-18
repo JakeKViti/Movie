@@ -16,19 +16,22 @@ Sometime code will get call as if they keyword was "".
 
 ## Installation
 1: Fork & Clone
+
 2: cd into Folder
+
 3: Please Use An Apache Server, The app was built with Xampp. You can download that [here](https://www.apachefriends.org/index.html)
+
 4: Once a server is running, connect to it at this link: localhost/movie (after the / should be whatever the folder that contains the code is called)
 
 
 ## Usage 
 When the user opens the site, they will be greeted with instuctions on what you should type to get movies. Those are "Year", "Genre" and "Keyword"
 
-Year: Enter what year the movie was released.
+**Year**: Enter what year the movie was released.
 
-Genre: Enter a genre to get movies with that genre. The genres supported by the API are Adventure, Fantasy, Animation, Drama, Horror, Action, Comedy, History, Western, Thriller, Crime, Documentary, Science Fiction, Mystery, Music, Romance, Family, War, and TV Movie.
+**Genre**: Enter a genre to get movies with that genre. The genres supported by the API are Adventure, Fantasy, Animation, Drama, Horror, Action, Comedy, History, Western, Thriller, Crime, Documentary, Science Fiction, Mystery, Music, Romance, Family, War, and TV Movie.
 
-Keyword: Enter a keyword to get movies relating to that word.
+**Keyword**: Enter a keyword to get movies relating to that word.
 
 After clicking the search button, it will take you to a search page with all the movies related to the search term. At the bottom of the page there are 2 arrows, they will take you to the next and previous pages.
 
