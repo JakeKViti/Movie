@@ -8,7 +8,7 @@ Only the top movie on each page can be added as favorite.
 
 Only the first genre is saved for the favorite.
 
-if a movie title has quotes, it will be cut off after the first quote.
+if a movie title has quotes, the title will be cut off after the first quote if favorited.
 
 Sometime code will get call as if they keyword was "".
 
